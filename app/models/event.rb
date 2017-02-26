@@ -27,7 +27,7 @@ class Event < ActiveRecord::Base
 
   has_one :region, through: :location
 
-  has_many :rsvps, dependent: :destroy, inverse_of: :event
+  has_many :rsvps, inverse_of: :event
   has_many :sections, dependent: :destroy
   has_many :event_emails, dependent: :destroy
 
