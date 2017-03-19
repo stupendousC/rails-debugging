@@ -28,7 +28,6 @@ class Rsvp < ActiveRecord::Base
   after_initialize :set_defaults
 
   after_save :update_counter_cache
-  after_destroy :update_counter_cache
 
   MAX_EXPERIENCE_LENGTH = 250
   with_options(unless: :historical?) do |normal_event|
