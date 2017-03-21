@@ -163,11 +163,6 @@ module Seeder
                             taing: [true, false].sample)
     end
 
-    rand(3..6).times do |n|
-      waitlisted = find_or_create_user("waitlisted-#{n}@example.com")
-      create_student_rsvp(event: event, user: waitlisted, class_level: 2, waitlist_position: n)
-    end
-
     event.event_emails.create!(
       sender: organizer,
       subject: 'Thanks for signing up for this event!',
