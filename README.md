@@ -1,9 +1,7 @@
 # Rails Debugging Activity
 In this activity you will practice Rails debugging techniques using a real-world Ruby on Rails project, [Bridge Troll](https://www.bridgetroll.org/). Bridge Troll is the event planning web application used for all [RailsBridge](http://railsbridge.org/) (and related *Bridge) events.
 
-For this activity you will first clone a special copy of the Bridge Troll repository and follow the setup instructions from its README to create an environment for local development of the application. This will be similar to how you have setup Rails projects for Ada, however it may be more involved because this application is "production-ready", rather than instructional.
-
-After setting up the local development environment you will work through the debugging process for an example bug, including the implementation of a fix for that bug. Once you have corrected the example bug you should follow the same process to tackle the three other bugs that have been inserted into this codebase. All of the bugs presented in this activity can be corrected with a specific, small change to the code.
+For this activity you will work with a special copy of the Bridge Troll repository which has been modified to include a few bugs. After setting up the local development environment you will work through the debugging process for an example bug, including the implementation of a fix for that bug. Once you have corrected the example bug you should follow the same process to tackle the three other bugs. All of the bugs presented in this activity can be corrected with a specific, small change to the code.
 
 ## Learning Goals
 By working through this activity you will gain exposure to the following software development skills:
@@ -18,12 +16,14 @@ By working through this activity you will gain exposure to the following softwar
 ## RailsBridge's Bridge Troll web application
 RailsBridge is an organization that runs free coding workshops all over the world, specifically targeted at groups of people that are underrepresented in tech. Members of RailsBridge and the open source community have built Bridge Troll to help with the planning and organization of these workshops.
 
-Before you setup the Bridge Troll application for local development, please browse through [the repository](https://github.com/railsbridge/bridge_troll) to get a feel for the project. There will probably be many features and Rails features and techniques that you are not familiar with yet, and that's totally fine. Understanding everything that the Bridge Troll project does is _not_ the goal for this activity.
+Before you setup the Bridge Troll application for local development, please browse through this repository to get a feel for the project. There will probably be many files and Rails features and techniques that you are not familiar with yet, and that's totally fine. Understanding everything that the Bridge Troll project does is **not** the goal for this activity.
 
 ### Setup
-First, clone our copy of the Bridge Troll repository -- you **must** use our copy, as the real repository does not contain the bugs you will be fixing in this activity!
+First, fork and clone our copy of the Bridge Troll repository (this repo) -- you **must** use our copy, as the real repository does not contain the bugs you will be fixing in this activity!
 
-After you have cloned the repo you should follow the setup instructions from the project's README file. The Bridge Troll developers have created a setup script that you can run to automatically get everything set up, however there are a couple of steps you'll need to complete before running the script.
+After you have cloned the repo you should follow the setup instructions from [the project's README file](./README-bridge_troll.md). Specifically, follow the **Quickstart**, **Running tests**, and **Seed Data** sections. The Bridge Troll developers have created a setup script that you can run to automatically get everything set up, however there are additional steps you'll need to complete before running the script.
+
+As suggested by the Bridge Troll README, you should play around with the application and get a feel for the different parts of the app. This will be important later for understanding the user reports for each bug. Especially check out the "Seed Data" section for instructions on how to log into the app with seeded user accounts.
 
 ## Debugging in Rails
 Debugging any application usually takes one of two forms: either you encounter the bug yourself while developing the application, or a user encounters the bug and files a report. You've already seen the first form of debugging quite a lot here at Ada because it's a natural, necessary part of building software.
