@@ -13,12 +13,12 @@ By working through this activity you will gain exposure to the following softwar
 * Using `pry` and `better_errors` to pin-point the source of a bug
 * Determining which mitigation or correction options are most viable for a given bug
 
-## RailsBridge's Bridge Troll web application
-RailsBridge is an organization that runs free coding workshops all over the world, specifically targeted at groups of people that are underrepresented in tech. Members of RailsBridge and the open source community have built Bridge Troll to help with the planning and organization of these workshops.
+## RailsBridge and Bridge Troll
+[RailsBridge](http://railsbridge.org/) is an organization that runs free coding workshops all over the world, specifically targeted at groups of people that are underrepresented in tech. Members of RailsBridge and the open source community have built [Bridge Troll](https://www.bridgetroll.org/) to help with the planning and organization of these workshops.
 
 Before you setup the Bridge Troll application for local development, please browse through this repository to get a feel for the project. There will probably be many files and Rails features and techniques that you are not familiar with yet, and that's totally fine. Understanding everything that the Bridge Troll project does is **not** the goal for this activity.
 
-### Setup
+## Project Setup
 First, fork and clone our copy of the Bridge Troll repository (this repo) -- you **must** use our copy, as the real repository does not contain the bugs you will be fixing in this activity!
 
 After you have cloned the repo you should follow the setup instructions from [the project's README file](./README-bridge_troll.md). Specifically, follow the **Quickstart**, **Running tests**, and **Seed Data** sections. The Bridge Troll developers have created a setup script that you can run to automatically get everything set up, however there are additional steps you'll need to complete before running the script.
@@ -30,7 +30,7 @@ Please refer to [this textbook resource on debugging](https://github.com/Ada-Dev
 
 After fixing all of the bugs in this activity you should be able to run the Bridge Troll project's tests (see the README for details on how to do that) with no failures.
 
-### Example
+## Example
 #### 1. User Report
 The beginning of this whole process is to receive a bug report from a user. Sometimes the bug reports are detailed and have clear descriptions of what is going on. Most times however, there's a fair bit of interpretation and guess work that must be applied to fully understand the report.
 
@@ -77,12 +77,12 @@ Now we need to figure out how to modify it to fix the issue. There are several w
 
 With that change in place, we can reload the page and check if our fix worked. Since this is a UI issue we don't have any automated tests that we can run to verify the fix, but with all of the other bugs in the activity you should see that at least one of the failing tests is working again if the bug has been fixed properly.
 
-### Bugs
-#### Saving event as draft
+## Bugs
+### Saving event as draft
 > When I save an event as a draft, I get a 500 error.
 
-#### Removing event RSVP
+### Removing event RSVP
 > When I remove an attendee's RSVP for an event, I get an error and the RSVP is not removed.
 
-#### Re-joining event after cancelling RSVP
+### Re-joining event after cancelling RSVP
 > When I cancel my RSVP for a full event, I can only re-join the waitlist even if there are now available spots.
