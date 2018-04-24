@@ -79,5 +79,10 @@ With that change in place, we can reload the page and check if our fix worked. S
 
 ### Bugs
 #### Saving event as draft
+> When I save an event as a draft, I get a 500 error.
+
 #### Removing event RSVP
+> When I remove an attendee's RSVP for an event, I get an error and the RSVP is not removed.
+
 #### Re-joining event after cancelling RSVP
+> When I cancel my RSVP for a full event, I can only re-join the waitlist even if there are now available spots.
