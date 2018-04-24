@@ -1,7 +1,5 @@
 # Rails Debugging Activity
-In this activity you will practice Rails debugging techniques using a real-world Ruby on Rails project, [Bridge Troll](https://www.bridgetroll.org/). Bridge Troll is the event planning web application used for all [RailsBridge](http://railsbridge.org/) (and related *Bridge) events.
-
-For this activity you will work with a special copy of the Bridge Troll repository which has been modified to include a few bugs. After setting up the local development environment you will work through the debugging process for an example bug, including the implementation of a fix for that bug. Once you have corrected the example bug you should follow the same process to tackle the three other bugs. All of the bugs presented in this activity can be corrected with a specific, small change to the code.
+In this activity you will practice Rails debugging techniques using a real-world Ruby on Rails project.
 
 ## Learning Goals
 By working through this activity you will gain exposure to the following software development skills:
