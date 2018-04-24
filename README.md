@@ -26,15 +26,9 @@ After you have cloned the repo you should follow the setup instructions from [th
 As suggested by the Bridge Troll README, you should play around with the application and get a feel for the different parts of the app. This will be important later for understanding the user reports for each bug. Especially check out the "Seed Data" section for instructions on how to log into the app with seeded user accounts.
 
 ## Debugging in Rails
-Debugging any application usually takes one of two forms: either you encounter the bug yourself while developing the application, or a user encounters the bug and files a report. You've already seen the first form of debugging quite a lot here at Ada because it's a natural, necessary part of building software.
+Please refer to [this textbook resource on debugging](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/00-programming-fundamentals/debugging-user-reports.md) for more details on the process for moving from a user-provided report of incorrect behavior to a complete set of repro steps to use for debugging.
 
-The second form of debugging is something that you will likely begin to experience during your internship, and it has some unique aspects to it that inform the approach you'll need to take when debugging. Specifically, it is necessary to translate from the user's report into a set of "reproduction steps" (also called a "repro") which can be followed to trigger the bug.
-
-You need to do this because users of our application generally do not have any understanding of how it actually works. They only see the user interface and so their explanation of what went wrong is usually framed in terms of how things are presented in the UI.
-
-For example, they might make a purchase from your store and see that it does not show up in their purchases list. They might then report this to you as a bug with the purchase list. But upon investigation you might find that the issue was actually due to the payment gateway system returning an error code that your application did not expect, resulting in the purchase being dropped from the database.
-
-Once you have a set of repro steps for a specific bug you can follow them in your local development environment and see the full error message and details (which are generally hidden from users in production deployments). At this point you can follow the same debugging process as when you encounter an error yourself.
+After fixing all of the bugs in this activity you should be able to run the Bridge Troll project's tests (see the README for details on how to do that) with no failures.
 
 ### Example
 
