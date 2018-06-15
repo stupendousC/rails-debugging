@@ -24,7 +24,7 @@ After you have cloned the repo you should follow the setup instructions from [th
 As suggested by the Bridge Troll README, you should play around with the application and get a feel for the different parts of the app. This will be important later for understanding the user reports for each bug. Especially check out the "Seed Data" section for instructions on how to log into the app with seeded user accounts.
 
 ## Debugging in Rails
-Please refer to [this textbook resource on debugging](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/00-programming-fundamentals/debugging-user-reports.md) for more details on the process for moving from a user-provided report of incorrect behavior to a complete set of repro steps to use for debugging.
+Please refer to [this textbook resource on debugging](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/00-programming-fundamentals/debugging-user-reports.md) for more details on the process for moving from a user-provided report of incorrect behavior to a complete set of steps to use for reproducing the exact same behavior (known as "repro steps"), which is very helpful for debugging.
 
 After fixing all of the bugs in this activity you should be able to run the Bridge Troll project's tests (see the README for details on how to do that) with no failures.
 
