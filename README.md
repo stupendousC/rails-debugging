@@ -87,7 +87,7 @@ It can also help to run the test suite, since there are tests which are failing 
 
 ### User Reports
 #### 1. Saving event as draft
-> When I save an event as a draft, I get a 500 error.
+> When I save an event as a draft, I get a 500 error even though I have filled out all of the required fields.
 
 #### 2. Removing event RSVP
 > When I remove an attendee's RSVP for an event, I get an error and the RSVP is not removed.
