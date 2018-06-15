@@ -75,12 +75,22 @@ Now we need to figure out how to modify it to fix the issue. There are several w
 
 With that change in place, we can reload the page and check if our fix worked. Since this is a UI issue we don't have any automated tests that we can run to verify the fix, but with all of the other bugs in the activity you should see that at least one of the failing tests is working again if the bug has been fixed properly.
 
-## Bugs
-### Saving event as draft
+## Activity
+Now that we've gotten the project set up, and worked through fixing an example bug based on a user report, we can start to work on the meat of the activity. Below you will find three different user reports of incorrect behavior that someone experienced when using the app. These reports are short and do not include much in the way of specific details.
+
+### Strategy / Tips
+The first part of your job will be to investigate the Bridge Troll application and its functionality to narrow down what part of the app the user was interacting with, and eventually create a set of repro steps for each bug. For example, if the bug mentions saving an event as a draft... you'll want to figure out exactly what an "event" is in the Bridge Troll app, as well as what it means to save one as a draft. Run the app with `rails s` and start exploring!
+
+Once you have a handle on the context of a particular user report, and have converted it into a set of reliable repro steps, you can start debugging! Use all of the various debugging tools we've seen before (e.g. `puts` statements, pry, and the better_errors page) to narrow down exactly what lines of code are involved. Then begin considering how those lines might be changed in order to correct the bug.
+
+It can also help to run the test suite, since there are tests which are failing now as a result of bug that I've introduced. If you're unsure of what changes you might need to make to the code to fix a bug, the failing tests might provide additional clues as to how the developers were intending for the code to work.
+
+### User Reports
+#### 1. Saving event as draft
 > When I save an event as a draft, I get a 500 error.
 
-### Removing event RSVP
+#### 2. Removing event RSVP
 > When I remove an attendee's RSVP for an event, I get an error and the RSVP is not removed.
 
-### Re-joining event after cancelling RSVP
+#### 3. Re-joining event after cancelling RSVP
 > When I cancel my RSVP for a full event, I can only re-join the waitlist even if there are now available spots.
