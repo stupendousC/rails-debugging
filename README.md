@@ -33,45 +33,46 @@ After fixing all of the bugs in this activity you should be able to run the Brid
 The beginning of this whole process is to receive a bug report from a user. Sometimes the bug reports are detailed and have clear descriptions of what is going on. Most times however, there's a fair bit of interpretation and guess work that must be applied to fully understand the report.
 
 Read through the following user report a couple of times before proceeding to the next step:
-> When I look at the Organizer Console for an event, the Operating System Breakdown table has difficult-to-read percentages listed for each OS.
+> When I go to an event's detail page, click the link that says "Click here for more information about class levels in this course!", and visit the page about Class Levels, it has a header with a typo that says "Class Levles for Ruby on Rails" instead of "Class Levels for Ruby on Rails"
 
 #### 2. Repro Steps
 Once given a user report like this we need to first translate it into a set of repro steps.
 
-Because this report is talking about the "Organizer Console" we know that we must first log in as an organizer to access that page. Once logged in we need to find a particular event and visit the organizer page for it. On that page we then need to locate the "Operating System Breakdown" section.
+This report doesn't talk about a situation where the user needs to be logged in or not logged in, so right now we don't have any information that to reproduce it we need to log in. Because this report is talking about the specific Class Levels page that was reached through an event's detail page, we need at least one existing event that has that link. On that page we then need to navigate and find the page in question and observe the typo.
 
 1. Open the website in Chrome.
-1. Click the "Sign In" button.
-1. Enter "organizer@example.com" for the email and "password" for the password.
 1. Under the "Upcoming events" section locate an event [probably the "Seeded Test Event"].
-1. Under that event's details click the "Organizer Console" button (or find a different event if that button is not present).
-1. Scroll to the bottom of the page.
-1. Observe that within the "Operating System Breakdown" table each row has a count and a percentage of total student attendees with that operating system.
-1. Observe that for each row where the percentage is not exact it is instead listed with a very large number of digits, e.g. "10.204081632653061%". [Note: You may not see this because the seeded event is random.]
+1. Under that event's details click the "Click here for more information about class levels in this course!" link (or find a different event if that link is not present).
+1. Observe that the header "Class Levles ..." has a typo.
 
 #### 3. Bug Finding
 Now that we have a set of repro steps that we can follow to trigger the bug, we can start using those steps to pin-point what code is involved.
 
 Because this bug involves the UI primarily (something is being displayed to the user in an undesirable way), we should start with our view code. It's possible that the underlying issue is actually elsewhere in the code base, but the view code is a good place to start.
 
-We need to identify which view template is responsible for the Operating System Breakdown table. One way of figuring this out would be to look at the URL (e.g. "http://localhost:3000/events/1/organizer_tools") and match that up with a particular route, then use that to find the associated controller action and eventually view template.
+We need to identify which view template is responsible for the Operating System Breakdown table. One way of figuring this out would be to look at the URL (e.g. "http://localhost:3000/events/1/levels") and match that up with a particular route, then use that to find the associated controller action and eventually view template.
 
-However, a simpler option would be to search through the whole project for the text "Operating System Breakdown", because that's the literal text for the header on this table. You can search through your whole project in Atom by using Cmd + Shift + F.
+However, a simpler option would be to search through the whole project for the text "Class Levles for Ruby on Rails" or "Class Levles", because that's the literal text for the header on this page. You can search through your whole project in Atom by using Cmd + Shift + F.
 
-Either option should eventually have you end up at the file `app/views/events/organizer_tools/_operating_system_breakdown.erb`. This partial view template is responsible for just the OS table section of the organizer tools page.
+Note: Did "Class Levles for Ruby on Rails" produce any search results?
 
-From here we can find that line 20 is the part where we output the contents of the "Count" column in the table, including the percentage.
+Either option should eventually have you end up at the file `app/views/events/levels.html.erb`.
+
+From here we can find that line 4 is the part where we output the header.
 
 #### 4. Bug Fixing
 We've located the code that is most likely involved with our bug:
 ```erb
-<%= count %> (<%= ((count.to_f / total) * 100) %>%)
+<h2>Class Levles for <%= (@event.course || Course.find_by_name("RAILS")).title %></h2>
 ```
 
-Now we need to figure out how to modify it to fix the issue. There are several ways of going about this, depending on exactly what results we want. In this example I'm going to specify that we want to only output 2 decimal points for the percentage. The simplest way to solve that is by using [Ruby's format string functionality](https://ruby-doc.org/core-2.2.0/String.html#25-method):
+Now time to implement the fix!
+
 ```erb
-<%= count %> (<%= '%.2f' % ((count.to_f / total) * 100) %>%)
+<h2>Class Levels for <%= (@event.course || Course.find_by_name("RAILS")).title %></h2>
 ```
+
+Revisit an earlier question: Did "Class Levles for Ruby on Rails" produce any search results? Why not?
 
 With that change in place, we can reload the page and check if our fix worked. Since this is a UI issue we don't have any automated tests that we can run to verify the fix, but with all of the other bugs in the activity you should see that at least one of the failing tests is working again if the bug has been fixed properly.
 
@@ -86,11 +87,12 @@ Once you have a handle on the context of a particular user report, and have conv
 It can also help to run the test suite, since there are tests which are failing now as a result of bug that I've introduced. If you're unsure of what changes you might need to make to the code to fix a bug, the failing tests might provide additional clues as to how the developers were intending for the code to work.
 
 ### User Reports
-#### 1. Saving event as draft
+
+#### 1. Operating System
+> When I look at the Organizer Console for an event, the Operating System Breakdown table has difficult-to-read percentages listed for each OS.
+
+#### 2. Saving event as draft
 > When I save an event as a draft, I get a 500 error even though I have filled out all of the required fields.
 
-#### 2. Removing event RSVP
+#### 3. Removing event RSVP
 > When I remove an attendee's RSVP for an event, I get an error and the RSVP is not removed.
-
-#### 3. Re-joining event after cancelling RSVP
-> When I cancel my RSVP for a full event, I can only re-join the waitlist even if there are now available spots.
