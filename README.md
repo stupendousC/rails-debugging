@@ -52,7 +52,7 @@ Because this bug involves the UI primarily (something is being displayed to the 
 
 We need to identify which view template is responsible for the Operating System Breakdown table. One way of figuring this out would be to look at the URL (e.g. "http://localhost:3000/events/1/levels") and match that up with a particular route, then use that to find the associated controller action and eventually view template.
 
-However, a simpler option would be to search through the whole project for the text "Class Levles for Ruby on Rails" or "Class Levles", because that's the literal text for the header on this page. You can search through your whole project in Atom by using Cmd + Shift + F.
+However, a simpler option would be to search through the whole project for the text "Class Levles for Ruby on Rails" or "Class Levles", because that's the literal text for the header on this page. You can search through your whole project in VS Code by using Cmd + Shift + F.
 
 Note: Did "Class Levles for Ruby on Rails" produce any search results?
 
