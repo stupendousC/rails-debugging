@@ -17,7 +17,7 @@
             <%= os.title %>
           </td>
           <td>
-            <%= count %> (<%= ((count.to_f / total) * 100) %>%)
+            <%= count %> (<%= ((count.to_f / total) * 100).round(2) %>%)
           </td>
         </tr>
       <% end %>
