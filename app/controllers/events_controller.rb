@@ -56,79 +56,79 @@ class EventsController < ApplicationController
           @checkiner = false
         end
         @ordered_rsvps = {
-          Role::VOLUNTEER => @event.ordered_rsvps(Role::VOLUNTEER),
-          Role::STUDENT => @event.ordered_rsvps(Role::STUDENT)
-        }
-        @ordered_waitlist_rsvps = {
-          Role::VOLUNTEER => @event.ordered_rsvps(Role::VOLUNTEER, waitlisted: true).to_a,
-          Role::STUDENT => @event.ordered_rsvps(Role::STUDENT, waitlisted: true).to_a
-        }
-      end
-      format.json do
-        render json: @event
-      end
-    end
+        Role::VOLUNTEER => @event.ordered_rsvps(Role::VOLUNTEER),
+        Role::STUDENT => @event.ordered_rsvps(Role::STUDENT)
+      }
+      @ordered_waitlist_rsvps = {
+      Role::VOLUNTEER => @event.ordered_rsvps(Role::VOLUNTEER, waitlisted: true).to_a,
+      Role::STUDENT => @event.ordered_rsvps(Role::STUDENT, waitlisted: true).to_a
+    }
   end
-  
-  def new
-    skip_authorization
-    @event = Event.new(public_email: current_user.email, time_zone: current_user.time_zone)
-    @event.event_sessions << EventSession.new
+  format.json do
+    render json: @event
   end
+end
+end
+
+def new
+  skip_authorization
+  @event = Event.new(public_email: current_user.email, time_zone: current_user.time_zone)
+  @event.event_sessions << EventSession.new
+end
+
+def edit
+  authorize @event
+end
+
+def create
+  skip_authorization
+  result = EventEditor.new(current_user, params).create
+  @event = result.event
+  @events= Event.all    ### IDK... 
   
-  def edit
-    authorize @event
+  flash[:notice] = result.notice if result.notice
+  if result.render
+    render result.render
+  else
+    redirect_to result.event
   end
+end
+
+def update
+  authorize @event
+  result = EventEditor.new(current_user, params).update(@event)
   
-  def create
-    skip_authorization
-    result = EventEditor.new(current_user, params).create
-    @event = result.event
-    @events= Event.all    ### IDK... 
-    
-    flash[:notice] = result.notice if result.notice
-    if result.render
-      render result.render
-    else
-      redirect_to result.event
-    end
+  flash[:notice] = result.notice if result.notice
+  if result.render
+    render result.render, status: result.status
+  else
+    redirect_to @event
   end
-  
-  def update
-    authorize @event
-    result = EventEditor.new(current_user, params).update(@event)
-    
-    flash[:notice] = result.notice if result.notice
-    if result.render
-      render result.render, status: result.status
-    else
-      redirect_to @event
-    end
+end
+
+def destroy
+  authorize @event
+  @event.destroy
+  redirect_to events_url
+end
+
+protected
+
+def set_time_zone
+  if params[:event] && params[:event][:time_zone].present?
+    Time.zone = params[:event][:time_zone]
   end
-  
-  def destroy
-    authorize @event
-    @event.destroy
-    redirect_to events_url
-  end
-  
-  protected
-  
-  def set_time_zone
-    if params[:event] && params[:event][:time_zone].present?
-      Time.zone = params[:event][:time_zone]
-    end
-  end
-  
-  def set_empty_location
-    @location = Location.new
-  end
-  
-  def find_event
-    @event = Event.find(params[:id])
-  end
-  
-  def allow_insecure?
-    request.get? && (request.format.json? || request.format.csv?)
-  end
+end
+
+def set_empty_location
+  @location = Location.new
+end
+
+def find_event
+  @event = Event.find(params[:id])
+end
+
+def allow_insecure?
+  request.get? && (request.format.json? || request.format.csv?)
+end
 end

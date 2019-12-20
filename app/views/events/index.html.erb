@@ -6,19 +6,14 @@
   <div class="col-md-12">
     <div class='upcoming-events'>
 
-      <%# DUNNO WHY, but the line below has to be here, instead of in events_ctrller %> 
-      <% @event_regions = @events.map(&:region).compact.uniq%>
-
-      <% if @event_regions.present? %>
+      <%#if @events.present? <-- this was the original buggy code, BUT!  the filter dragdown disappeared, and it shouldn't! %>    
+      <% if @event_regions.present? %>    
         <label class="region-select-container form-inline">
           Filter: <%= select_tag :region,
                                 options_from_collection_for_select(@event_regions, "id", "name"),
                                 prompt: "All Regions (Events are avail at SF Sutro OR Ferry building anyway)",
                                 class: 'region-select form-control cross-browser-select' %>
         </label>
-      <% else %>
-        <h1>The event has been entered into the Event database... BUT YOU'RE SEEING THIS B/C @event_regions = nil when it shouldn't be</h1>
-        <%# WHY??? IDK, but apparently I have to do the @event_regions calculations in here, instead of importing it from events_ctrller... %>
       <% end %>
       
       <h1>Upcoming events</h1>

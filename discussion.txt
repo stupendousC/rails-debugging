@@ -1,0 +1,23 @@
+1.  What process did you use to get to know the codebase?
+    I poked around to get a basic idea of what routes and ctrllers/models/views are in there.  
+    ! Run the tests!
+    Look at the actual site the users user... 
+      are they logged in or not?
+      what kind of user?
+    Being able to repro the bug... esp if it depends on specific data
+    Read the code 
+      Depth: Follow a user story or user flow.  Start with what a user sees (view) and the trace what uses that code, etc etc
+      Breadth: Trying to see how a specifric conce3pt/object/variable/word/etc is being used throughout the project
+
+2.  Did it work?
+    yeah
+
+3.  What would you do differently next time?
+    probably also draw a diagram or soemthing.
+    Balance beteen making as mnay small changes as necessary VS taking the time to understand the bigger picture
+
+4.  How is debugging from a user report different from debugging in development?
+    i had to first figure out how to reproduce the same error from the user report, so that took some trial and error
+
+5.  What surprised you, about the codebase or the exercise?
+    I thought I had to know the entire codebase to be able to debug, not so.
